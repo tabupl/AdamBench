@@ -5,6 +5,8 @@ I selected different quants for different models, chosing what seemed to give th
 
 The main benchmark metric "AdamBench" measures not just the quality of a given model's project, but also confronts it with the amount of iterations the model needed to perform a benchmark and the time required for it. So I'd call it a general practical usage scale in local agentic coding (on my specific hardware).
 
+[FULL RESULTS HERE](#full-results)
+
 ## Key takeaways
 
 - The TOP 1 winner of the main benchmark metric (AdamBench) is Qwen3.5 122b A10b

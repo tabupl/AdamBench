@@ -115,7 +115,9 @@ All the models were tested on exactly the same hardware and in the same general 
 
 The base `llama-server` command used:
 
-//TODO
+```
+.\llama-server.exe -m <MODEL_PATH> --host 0.0.0.0 --port 8080 -c 32768 -ngl auto --metrics --perf -np 1 -fa on -ctk q8_0 -ctv q8_0 --jinja --context-shift -fit on -fitt 512
+```
 
 ### Model interaction setup
 

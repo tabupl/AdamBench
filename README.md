@@ -268,6 +268,10 @@ This benchmark reflects:
 
 It is best interpreted as a strong reference point for similar local agentic coding workflows, not as a universal leaderboard.
 
+**Sampling settings weren't suited for specific models**
+
+To make the benchmark more reliable sampling settings should be tuned better. Either very low temp for each model OR the sampling settings recommended by the model creator.
+
 ---
 
 ## Full results

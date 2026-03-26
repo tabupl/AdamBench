@@ -1,0 +1,163 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+  color: #eee;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  margin: 0;
+}
+
+.gameContainer {
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+.score {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 1px;
+  background: #0a0a15;
+  border: 3px solid #333;
+  border-radius: 8px;
+  padding: 2px;
+  aspect-ratio: 1;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #1a1a2e;
+  border-radius: 2px;
+}
+
+.head {
+  background: #667eea;
+  border-radius: 4px;
+}
+
+.body {
+  background: #764ba2;
+}
+
+.food {
+  background: #ff4757;
+  border-radius: 50%;
+}
+
+.hint {
+  text-align: center;
+  color: #888;
+  margin-top: 1rem;
+}
+
+.gameOver {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+.gameOver p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.gameOver p:last-of-type {
+  font-size: 1.2rem;
+  color: #667eea;
+}
+
+.restartBtn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.restartBtn:hover {
+  transform: scale(1.05);
+}
+
+.info {
+  max-width: 500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 500px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.section h2 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  color: #667eea;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section li {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.section li kbd {
+  background: #333;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}

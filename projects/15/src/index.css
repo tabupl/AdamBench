@@ -1,0 +1,861 @@
+/* Root variables */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --background-color: #f3f4f6;
+  --card-background: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --grid-size: 15;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--card-background);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header h1 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s;
+}
+
+.nav a:hover {
+  background-color: var(--background-color);
+}
+
+.nav a.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+  background-color: var(--primary-hover);
+  opacity: 0.7;
+}
+
+.btn-secondary {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+}
+
+.btn-danger {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Buttons Group */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Error Messages */
+.error-message {
+  background-color: #fee2e2;
+  color: var(--error-color);
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Auth Pages */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.auth-card {
+  background-color: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.auth-card p {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Toggle Auth */
+.toggle-auth {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.toggle-btn:hover {
+  background: none;
+}
+
+/* Login Page */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background-color: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.login-card h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.login-card p {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Dashboard */
+.dashboard {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.dashboard-card h2,
+.dashboard-card h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.dashboard-card .description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-actions {
+  margin-top: 1.5rem;
+}
+
+.dashboard-actions .btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Action Grid */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.action-item:hover {
+  background-color: var(--border-color);
+}
+
+.action-icon {
+  font-size: 2rem;
+}
+
+.action-item span:last-child {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Account Summary */
+.account-summary {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.account-summary dt {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.account-summary dd {
+  color: var(--text-primary);
+}
+
+.summary-row {
+  display: contents;
+}
+
+/* Help Text */
+.help-text {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Profile Page */
+.profile-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  background-color: var(--card-background);
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-header h1 {
+  color: var(--primary-color);
+}
+
+.logout-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Profile Form */
+.profile-info {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.profile-info h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.profile-info dl {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-info dt {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.profile-info dd {
+  color: var(--text-primary);
+}
+
+.info-row {
+  display: contents;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Snake Game Page */
+.snake-game-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.snake-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.snake-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.snake-header h1 {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.score-board {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.score {
+  color: var(--primary-color);
+}
+
+.high-score {
+  color: var(--warning-color);
+}
+
+.snake-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.game-status {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.status-text {
+  color: var(--primary-color);
+}
+
+.status-text.game-over {
+  color: var(--error-color);
+}
+
+.snake-info h2 {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.snake-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.snake-info li {
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+.snake-info li:last-child {
+  border-bottom: none;
+}
+
+.controls {
+  background-color: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.control-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  justify-items: center;
+  margin: 1rem 0;
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-btn:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.control-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.control-hint {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.start-btn,
+.restart-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.start-btn {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.start-btn:hover {
+  background-color: #059669;
+}
+
+.restart-btn {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.restart-btn:hover {
+  background-color: #dc2626;
+}
+
+.snake-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  gap: 0;
+  background-color: var(--card-background);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.cell.empty {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+}
+
+.cell.head {
+  background-color: var(--primary-color);
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+.cell.body {
+  background-color: #818cf8;
+  animation: none;
+}
+
+.cell.food {
+  background-color: var(--error-color);
+  border: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Auth Loading */
+.auth-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Protected Route Unauthorized */
+.unauthorized-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.unauthorized-card {
+  background-color: var(--card-background);
+  padding: 3rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  max-width: 400px;
+}
+
+.unauthorized-card h1 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.unauthorized-card p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .container,
+  .dashboard,
+  .profile-page,
+  .snake-game-page {
+    padding: 1rem;
+  }
+
+  .auth-card,
+  .login-card,
+  .profile-card,
+  .unauthorized-card,
+  .snake-info {
+    padding: 1.5rem;
+  }
+
+  .snake-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .control-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .control-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .cell {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+  }
+
+  .account-summary,
+  .profile-info dl {
+    grid-template-columns: 1fr;
+  }
+
+  .account-summary dt,
+  .profile-info dt {
+    margin-bottom: 0.25rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .score-board {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .start-btn,
+  .restart-btn {
+    width: 100%;
+  }
+}

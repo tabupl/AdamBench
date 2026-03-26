@@ -1,0 +1,1 @@
+Simplify the project structure and remove unnecessary complexity.

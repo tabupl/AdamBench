@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Build outputs
+build/
+
+# Logs
+npm-debug.log*
+
+# Temporary files
+*.tmp
+
+# Misc
+.DS_Store

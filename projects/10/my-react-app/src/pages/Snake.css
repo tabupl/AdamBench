@@ -1,0 +1,26 @@
+.snake-wrapper {
+  max-width: 420px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.snake-canvas {
+  background: #f0f0f0;
+  display: block;
+  margin: 1rem auto;
+  border: 2px solid #333;
+}
+
+.game-over {
+  background: #ffdddd;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}

@@ -1,0 +1,281 @@
+.snake-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.snake-container {
+  max-width: 500px;
+  width: 100%;
+}
+
+.snake-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.snake-header h1 {
+  font-size: 1.75rem;
+  color: #4ecdc4;
+  margin: 0;
+}
+
+.back-link {
+  color: #a0a0b0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #4ecdc4;
+}
+
+.snake-info {
+  margin-bottom: 12px;
+}
+
+.snake-stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4ecdc4;
+}
+
+.snake-game-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.snake-canvas {
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+.snake-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 46, 0.95);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  text-align: center;
+}
+
+.snake-overlay h2 {
+  font-size: 1.5rem;
+  color: #4ecdc4;
+  margin: 0 0 20px 0;
+}
+
+.snake-rules {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.snake-rules h3 {
+  font-size: 0.9rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 12px 0;
+}
+
+.snake-rules ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.snake-rules li {
+  font-size: 0.85rem;
+  color: #e0e0e0;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.snake-rules strong {
+  color: #4ecdc4;
+}
+
+.food-dot {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.snake-start-btn {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  color: #1a1a2e;
+  border: none;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.snake-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+.snake-final-score {
+  margin-bottom: 20px;
+}
+
+.snake-final-score p {
+  margin: 8px 0;
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}
+
+.snake-final-score strong {
+  color: #4ecdc4;
+  font-size: 1.5rem;
+}
+
+.new-high-score {
+  color: #ffd93d;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.snake-hint {
+  font-size: 0.8rem;
+  color: #808090;
+  margin-top: 12px;
+}
+
+.snake-controls {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.controls-hint {
+  font-size: 0.75rem;
+  color: #808090;
+  margin-bottom: 8px;
+}
+
+.mobile-controls {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #4ecdc4;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.control-btn:active {
+  background: rgba(78, 205, 196, 0.3);
+  transform: scale(0.95);
+}
+
+.control-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.snake-footer {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.auth-link {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.auth-link:hover {
+  color: #9ca3af;
+}
+
+@media (max-width: 520px) {
+  .snake-header {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .snake-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .snake-stats {
+    padding: 12px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .snake-canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .mobile-controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .control-btn {
+    width: 45px;
+    height: 45px;
+  }
+}

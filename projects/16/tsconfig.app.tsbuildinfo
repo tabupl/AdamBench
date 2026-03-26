@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/layout.tsx","./src/protectedroute.tsx","./src/auth.tsx","./src/main.tsx","./src/pages/dashboardpage.tsx","./src/pages/loginpage.tsx","./src/pages/profilepage.tsx","./src/pages/snakepage.tsx"],"version":"5.9.3"}

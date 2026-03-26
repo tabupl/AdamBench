@@ -1,0 +1,200 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.gameCard {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.score {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.scoreValue {
+  color: #fbbf24;
+}
+
+.gameBoard {
+  display: grid;
+  grid-template-columns: repeat(20, 20px);
+  grid-template-rows: repeat(20, 20px);
+  margin: 2rem auto;
+  background: #1a1a2e;
+  border: 4px solid #2d3748;
+  border-radius: 8px;
+}
+
+.cell {
+  border: 1px solid #2d3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.snakeHead {
+  background: #48bb78;
+  z-index: 2;
+}
+
+.snakeBody {
+  background: #68d391;
+}
+
+.food {
+  background: #fc8181;
+}
+
+.controls {
+  padding: 0 2rem 2rem;
+  text-align: center;
+}
+
+.button {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.gameOver {
+  text-align: center;
+}
+
+.gameOverText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e53e3e;
+  margin: 0 0 0.5rem;
+}
+
+.finalScore {
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin: 0 0 1.5rem;
+}
+
+.rules,
+.controlsInfo {
+  padding: 1.5rem 2rem;
+  background: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.rules h2,
+.controlsInfo h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1rem;
+}
+
+.rules ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #4a5568;
+}
+
+.rules li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.rules strong {
+  color: #2d3748;
+}
+
+.controlGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.controlItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #2d3748;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .gameBoard {
+    margin: 1rem auto;
+  }
+
+  .controls {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .rules,
+  .controlsInfo {
+    padding: 1rem;
+  }
+
+  .controlGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,26 @@
+project,task_completion,correctness,code_quality,architecture_maintainability,simplicity_vs_overengineering,overall_quality,final_score,comment
+1,8,7,8,6,8,7,70,Auth state siloed per component — useAuth has no React Context/Provider so login state is never reactively shared across the tree.
+2,6,7,8,8,8,7,63,Profile page entirely missing despite status.md claiming full completion; only 4 of 5 prompts delivered.
+3,9,8,9,8,8,8,74,Broken vite.config.ts test setup reference (missing file) means npm test fails immediately; stale README describes removed architecture.
+4,5,5,6,5,6,5,45,Profile save is self-acknowledged as non-functional (data discarded); double AuthProvider nesting breaks root-level redirect logic.
+5,5,4,4,5,3,4,30,Tailwind CSS used everywhere but not installed — entire UI renders unstyled at runtime; snake game left with visible debug panels and console.log spam.
+6,9,9,9,7,8,8,83,All 5 prompts complete with clean idiomatic code; two empty zombie files (authService.ts and ProtectedRoute.tsx) left over contradict the simplification requirement.
+7,1,1,2,2,2,1,9,Non-functional: no entry point file exists, App.ts uses wrong extension preventing JSX parsing, DashboardPage imported but missing — self-reported failure on prompt 1.
+8,7,7,8,7,7,7,67,Profile page is read-only display only — no editable inputs, no save handler, no updateProfile method anywhere; prompt 3 not implemented despite status claiming completion.
+9,6,6,7,5,5,6,52,REFACTORING_SUMMARY.md and ARCHITECTURE.md describe a full service layer with tests that does not exist in the codebase; dashboard has no logout button.
+10,4,3,5,5,4,4,32,Auth context is non-reactive (state read once at mount, never updated); snake game has 5 independent bugs including food teleporting every render and swapped collision axes.
+11,8,7,7,6,6,7,65,README and coverage report describe dependency-injected architecture and 85%+ test coverage that do not exist — zero test files in src/ despite full Vitest setup.
+12,7,6,6,7,8,6,60,Snake game recreates its setInterval on every tick (anti-pattern); allows 180° direction reversal causing instant death; no restart button; no session persistence.
+13,5,3,6,5,4,4,35,useAuth returns non-reactive class-singleton values instead of React state — login never triggers re-renders so the entire auth flow is functionally broken.
+14,3,4,5,5,3,4,28,Failed at prompt 2; only 2 of 5 prompts attempted. Tests use invalid vi.spyOn(fn,'call') pattern and a global setup that mocks localStorage.setItem to throw, breaking all tests.
+15,7,6,7,6,8,6,60,Prompt 2 refactor adds no structural change and no tests; profile handleSave writes to localStorage but never calls setUser so live auth state is never updated.
+16,10,9,10,9,10,10,96,All 5 prompts correctly implemented in just 8 source files; directionRef avoids stale closures; useMemo for stable context value; genuinely exemplary minimal submission.
+17,2,5,5,2,4,2,18,Prompt 5 simplification pass deleted all pages except Snake — login, dashboard, profile, auth, and protected routes are all absent in the final deliverable.
+18,10,7,8,8,7,8,80,All 5 prompts delivered with polished UI; snake game loop restarts on every food pickup because score is in the useEffect dependency array causing interval churn.
+19,5,5,6,6,4,5,45,Snake game is broken due to stale closure — snake array never updates inside the rAF loop so the snake never grows; agent self-reported failure and could not fix it.
+20,8,5,6,6,5,6,48,Five files use React.FC without importing React under strict TypeScript — project would fail to compile; also manually re-implements ~300 lines of Tailwind utility CSS instead of using the library.
+21,3,3,5,4,3,3,21,AuthContext.login never calls setState after storing the user so isAuthenticated stays false; ProfilePage calls useAuth() inside useEffect violating Rules of Hooks — hard crash.
+22,9,7,8,8,9,8,79,All 5 prompts complete with clean minimal architecture; updateUser deletes the FAKE_USERS key then reads it back immediately causing password to become undefined after any profile save.
+23,10,9,10,10,9,10,93,Only submission with real working tests (useLogin and useProfile test suites); snake uses useRef data model eliminating stale closures entirely; typed AuthError system.
+24,8,7,8,7,9,7,68,All 5 prompts with clean service/context separation; no tests written at all despite prompt 2 requiring testable architecture and the service layer being structured for it.
+25,7,5,6,7,8,6,55,Three CSS module class-name mismatches cause unstyled snake game-over overlay and broken dashboard elements; no session persistence means every page refresh logs the user out.

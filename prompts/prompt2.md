@@ -1,0 +1,1 @@
+Refactor the authentication logic to make it more modular and testable.

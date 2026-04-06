@@ -20,7 +20,19 @@ project_number,Task completion,Correctness,Code quality,Architecture / maintaina
 19,6/10,5/10,7/10,8/10,6/10,6/10,60/100,"CRITICAL: Snake game has stale closure bug - `snake` state in game loop is captured from closure, not updated properly"
 20,10/10,7/10,7/10,7/10,5/10,7/10,70/100,CRITICAL: Snake game has stale closure bug - `checkCollision` uses `snake` from outer closure instead of `prevSnake` inside setState callback
 21,4/10,3/10,6/10,6/10,5/10,4/10,28/100,"Critical bug in ProfilePage.tsx line 31: calls `useAuth().getCurrentUser()` but `getCurrentUser` is not a method on useAuth's return value (it exists on authService, not useAuth)"
-22,10/10,9/10,8/10,8/10,9/10,9/10,53/60,App.css contains unused Vite boilerplate CSS (minor hygiene issue)
-23,10/10,10/10,9/10,10/10,8/10,10/10,57/60,"Slightly more complex than necessary with multiple hook files (useLogin.ts, useProfile.ts) that could potentially be combined, but the separation improves testability"
-24,10/10,9/10,8/10,8/10,9/10,9/10,53/60,No tests included (unlike project 23 which had comprehensive tests)
-25,10/10,9/10,9/10,9/10,10/10,9/10,56/60,No tests included
+22,10/10,9/10,8/10,8/10,9/10,9/10,86/100,App.css contains unused Vite boilerplate CSS (minor hygiene issue)
+23,10/10,10/10,9/10,10/10,8/10,10/10,95/100,"Slightly more complex than necessary with multiple hook files (useLogin.ts, useProfile.ts) that could potentially be combined, but the separation improves testability"
+24,10/10,9/10,8/10,8/10,9/10,9/10,87/100,No tests included (unlike project 23 which had comprehensive tests)
+25,10/10,9/10,9/10,9/10,10/10,9/10,93/100,No tests included
+
+26,2/10,5/10,5/10,5/10,6/10,4/10,38/100,Failed during prompt 2; route protection logic is inverted/buggy and prompts 3-5 were never attempted.
+27,10/10,8/10,8/10,9/10,9/10,9/10,88/100,Complete and test-backed architecture with clean separation of concerns; minor CSS typo and small UX issues prevent a higher score.
+28,3/10,2/10,4/10,2/10,3/10,2/10,20/100,Prompt 5 broke the app catastrophically, leaving empty auth directories, no protected routes, and no profile page.
+29,9/10,7/10,7/10,6/10,8/10,7/10,72/100,All prompts are present, but profile saving uses a hacky login() workaround and the bundled test file is just failing boilerplate.
+30,10/10,9/10,8/10,9/10,9/10,9/10,90/100,Excellent full submission with a genuinely separated auth service and correct profile persistence; only minor redundancy and no tests keep it from perfection.
+31,10/10,9/10,9/10,9/10,9/10,9/10,90/100,Strong complete project with modular auth, good protected-route handling, and a functional profile/snake flow; missing tests are the main deduction.
+32,2/10,3/10,4/10,4/10,5/10,3/10,30/100,Failed prompt 1 because protected routes were never implemented and the login page is just a trivial button with no credentials.
+33,4/10,3/10,5/10,5/10,6/10,4/10,45/100,Prompt 3 broke due to pages expecting context properties that AuthContext never exposed; snake game was never implemented.
+34,10/10,9/10,8/10,9/10,9/10,9/10,90/100,Complete and clean submission with modular auth and working profile persistence; no tests and some inline-style tradeoffs are the main drawbacks.
+35,10/10,10/10,10/10,10/10,10/10,10/10,100/100,Reference-quality submission with actual auth tests, excellent modularity, correct profile updates, and a polished snake implementation.
+

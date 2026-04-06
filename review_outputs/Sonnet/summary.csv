@@ -24,3 +24,13 @@ project,task_completion,correctness,code_quality,architecture_maintainability,si
 23,10,9,10,10,9,10,93,Only submission with real working tests (useLogin and useProfile test suites); snake uses useRef data model eliminating stale closures entirely; typed AuthError system.
 24,8,7,8,7,9,7,68,All 5 prompts with clean service/context separation; no tests written at all despite prompt 2 requiring testable architecture and the service layer being structured for it.
 25,7,5,6,7,8,6,55,Three CSS module class-name mismatches cause unstyled snake game-over overlay and broken dashboard elements; no session persistence means every page refresh logs the user out.
+26,2,4,5,4,3,3,23,Only prompt 1 is partially delivered; route protection logic is contradictory and prompts 3-5 are entirely absent.
+27,9,8,8,9,9,9,82,All 5 prompts are fully delivered with clean auth/storage separation and real tests; only minor validation and styling issues hold it back.
+28,3,3,4,2,3,3,25,Prompt 5 simplification catastrophically deleted all auth infrastructure, leaving empty directories, no protected routes, and no profile page.
+29,8,6,7,7,8,7,66,All 5 prompts are present in a lean structure, but profile saving uses a hacky re-login flow that can overwrite the edited name.
+30,9,8,9,9,9,9,88,One of the stronger submissions: genuinely extracted auth service, correct profile persistence, and a technically sound ref-based snake game.
+31,9,9,9,9,8,9,90,High-quality complete submission with modular auth, accessible profile editing, and a well-implemented snake game; minor deductions for in-memory-only profile persistence and missing loading guard.
+32,2,3,4,3,5,2,32,Barebones stub that fails prompt 1: no protected routes, no real credentials, and prompts 2-5 were never attempted.
+33,4,3,5,4,5,3,38,Partial prompts 1-2 only; prompt 3 introduced build-breaking auth/context type mismatches and prompts 4-5 were never attempted.
+34,8,7,6,7,8,7,72,Compact and functionally complete, but fake auth is too weak and the snake game auto-starts with stale-closure risk and limited navigation polish.
+35,10,9,9,9,9,9,92,Excellent complete submission with a genuinely testable auth module and robust snake implementation; only minor React anti-patterns and fake-user mutation issues remain.

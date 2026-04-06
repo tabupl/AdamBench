@@ -1,35 +1,80 @@
 # AdamBench v1
 
-It's a practical benchmark of local models for agentic coding. I wanted to do it to find the best local coding model for myself, so it measures performance of models on my specific hardware (RTX 5080 16Gb; 64Gb RAM DDR5; AMD 9950 x3d) and on a workflow, that resembles a typical simple agentic coding development flow. The task and metrics while structured and generally measurable, are completely subjective (because it was supposed to help me chose the best models for coding for MYSELF). However, I decided to publish it, because I believ it actually might help others find best models for themselves as well. I'm also thinking of v2 of this benchmark already, since there are a couple things that could have been done better and doing v1 was fun.
-I selected different quants for different models, chosing what seemed to give the best speed vs quality value on my hardware. I also benchmarked a couple top models via API just to be able to compare the local ones with them.
+## Table of contents
+
+- [AdamBench v1.1 note](#adambench-v11-note)
+- [Key takeaways](#key-takeaways)
+- [Methodology](#methodology)
+- [Full results](#full-results)
+- [Interpretation and Personal notes](#interpretation-and-personal-notes)
+- [Projects deanonymized](#projects-deanonymized)
+
+It's a practical benchmark of local models for agentic coding. I wanted to do it to find the best local coding model for myself, so it measures performance of models on my specific hardware (RTX 5080 16Gb; 64Gb RAM DDR5; AMD 9950 x3d) and on a workflow, that resembles a typical simple agentic coding development flow. The task and metrics while structured and generally measurable, are completely subjective (because it was supposed to help me chose the best models for coding for MYSELF). However, I decided to publish it, because I believe it actually might help others find best models for themselves as well. I'm also thinking of v2 of this benchmark already, since there are a couple things that could have been done better and doing v1 was fun.
+I selected different quants for different models, choosing what seemed to give the best speed vs quality value on my hardware. I also benchmarked a couple top models via API just to be able to compare the local ones with them.
 
 The main benchmark metric "AdamBench" measures not just the quality of a given model's project, but also confronts it with the amount of iterations the model needed to perform a benchmark and the time required for it. So I'd call it a general practical usage scale in local agentic coding (on my specific hardware).
 
+**(v1.1) IMPORTANT NOTE:** So I got plenty of feedback after publishing AdamBench v1 and I would like to address some most repeated concerns:
+- Yes, models are used with different quants, because I was selecting the quant that in my opinion would give me a reasonable quality/speed ratio. This benchmark is not supposed to test models at their best, but rather at **local usefulness** which includes selecting a locally runnable quant.
+- Yes, this benchmark has a big flaw of having just one run per model (addressed also in Methodology section) and I'm aware of it. I'll make sure to automate v2 to make a couple runs per model to avoid the luck factor.
+- And yes, this benchmark doesn't test the ceiling of model's capabilities. So, eg. I'm aware that a local CoPawFlash 9b most likely isn't better than api Qwen3.5 397b, BUT it did better in this specific benchmark and it's totally fine. Maybe 397b was unlucky or reviewers had some inconsistency between reviews or there are other reasons (addressed in Methodology section). However, I believe it's still a good tool to compare local coding models (while having the obvious flaws of the benchmarking methodology in mind).
+
 [FULL RESULTS HERE](#full-results)
+
+## AdamBench v1.1 note
+
+I added a couple additional models to the benchmark (they have `(NEW)` prefix next to their names in scores/visualisations). Specifically:
+
+- All Gemma4 versions -> Very good scores, but worse than corresponding Qwen3.5 versions. However it seems that Gemmas generate less output tokens, which might be an upside for faster iterations, if that's what you're looking for. Also, it's worth mentioning that I couldn't quickly solve the issue with Gemma4 26b A4b not reasoning, I guess a reasoning Gemma would perform better, but I specifically mention reasoning disabled when Gemma4 26b is named in visualisations or ranking.
+
+- CoPawFlash 4b and 9b -> These models are fine-tunes of Qwen3.5 made by original creators of Qwen (as far as I know) and honestly, they are incredible for their size. Really. The 9b version added WORKING tests and didn't break them during later tasks. Even among much bigger models, many had huge issues with that in v1. If you're looking for a lightweight coding model, I'm pretty sure this one is the best currently.
+
+
+- DeltaCoder -> Another 9b coding fine-tune. Comparable to OmniCoder in my opinion. From my benchmarking experience, they both are a league lower than CoPaw Flash.
+
+
+- Qwen3.6 Plus via API -> It was released as beta, so I was curious how it would do and... the score was a huge surprise for me. All reviewers scored its solution the highest. Just wow.
+
+
+- Qwen3.5 27b Q3_K_M and Q4_K_M from Unsloth -> So, I got a lot of feedback about Qwen3.5 27b scoring lower than it should in v1 and I was surprised myself by how low it scored then compared to some other models. While it's not really fair towards other models to give this one another round (or even two in this case), I decided to do it out of main two reasons. Firstly, I noticed, that when initially testing Qwen3.5 27b in v1, I was using a broken llama.cpp version, and this was the reason I was getting so low speed (so basically kv cache wasn't offloaded to RAM and because of this more model layers were in RAM = lower tps). The other reason is that I used bartowski quant for 27b in v1. While I have nothing against bartowski quants, they are very good, I noticed that at least for Qwen3.5, quants from Unsloth work better for me (and I used them for other Qwen3.5 versions as well). And it's actually good that I added these two additional Qwen3.5 versions, because it shows the biggest issue with this benchmark, that I talk more about in Methodology section (basically the models that are lucky to get a better solution on the one run they're given, may get higher scores just by accident). Because I doubt that Q3_K_M is better than Q4_K_M.
+
+
+**So, just to mention, I DID run the v1.1 on a new llama.cpp build, so even though the methodology was exactly the same with this run, it can't be directly compared with previous scores. In visualisations and in the scores table, I specifically show which models are NEW -> added in v1.1.**
+
+I adjusted the relevant sections of README to match the new scores (mainly Key takeaways and Personal notes + new visualisations and scores table).
+
+Here goes the heatmap for only the 10 models added in v1.1:
+
+<p align="center">
+  <img src="./visualisations/new_models_heatmap_v11.png" width="900">
+</p>
+
+**This is the last update of AdamBench v1. No more models will be added to this version. The reason being an upgrade of my GPU to RTX5090. While v1.1 was still done on RTX5080, v2 will be done on a new GPU, will be automated and I'll try to eradicate as many flaws from v1 as I can. Stay tuned.**
 
 ## Key takeaways
 
-- The TOP 1 winner of the main benchmark metric (AdamBench) is Qwen3.5 122b A10b
-- If you're looking for a smaller model though, the TOP 3 of all tested local models was achieved by Qwen3.5 35b A3b
-- And if 35b is still too big, Qwen3.5 9b scored an astonishing TOP 7, outperforming many way bigger models.
-- The biggest positive surprise for me was the performance of gpt-oss-120b (TOP 2) and gpt-oss-20b (TOP 5). They both scored pretty well, but most importantly they are super fast for their sizes and at the same time they waste way less tokens than other models to perform a task.
-- The biggest disappointment for me were Nemotron models, that performed quite bad quality-wise, they were slow and they generated unreasonable amount of tokens (that were mostly reasoning). Nemotron 3 Super, the highest rated model from this familiy ended at TOP 10 spot, outperformed even at bare quality metrics by much smaller models.
+- The TOP 1 winner of the main benchmark metric (AdamBench) is Qwen3.5 27b.
+- Another TOP models with bigger sizes, that performed well and may match your usecase better, despite the lower score in my benchmark are: Qwen3.5 122b A10b, Qwen3.5 35b A3B, Gemma4 31b, Gemma4 26b A4b.
+- And if these sizes are still too big, there is a new undeniable king of lightweight coding models - CoPaw Flash 9b. It's really astonishing for it's size and also the biggest surprise for me in v1.1.
+- (v1) The biggest positive surprise for me was the performance of gpt-oss-120b and gpt-oss-20b. They both scored pretty well, but most importantly they are super fast for their sizes and at the same time they waste way less tokens than other models to perform a task.
+- (v1) The biggest disappointment for me were Nemotron models, that performed quite bad quality-wise, they were slow and they generated unreasonable amount of tokens (that were mostly reasoning). Nemotron 3 Super, the highest rated model from this familiy ended at TOP 10 spot, outperformed even at bare quality metrics by much smaller models.
 
 
-Initially I had 25 local models, that I wanted to benchmark (including the ones that were released after I started tests), however the benchmark only includes 20 of them. Models that are not included in the benchmark are:
+(v1)Initially I had 25 local models, that I wanted to benchmark (including the ones that were released after I started tests), however the benchmark only includes 20 of them. Models that are not included in the benchmark are:
 - Mistral Small 4
 - Qwen2.5 Coder 32b 
 - DeepSeek Coder v2 Lite Instruct
 - Pluto 9b
 - Devstral Small 2 24b Instruct
-I tried running all of them, but each of them had issues with tool calling or chat template, which was making them unusable for local agentic coding. In case of Mistral Small 4 I even spent a couple days trying to make it reasonably work... without success. So while I don't include them in the benchmark's score, it's safe to assume they are BELOW any models present in the benchmark, because they are unusable without some shenanigans (I assume it is possbile to use them eventually, but the effort required to make them work is probably not worth it. Especially comparing to all other 20 models, that didn't have any problems with my environment setup).
+
+I tried running all of them, but each of them had issues with tool calling or chat template, which was making them unusable for local agentic coding. In case of Mistral Small 4 I even spent a couple days trying to make it reasonably work... without success. So while I don't include them in the benchmark's score, it's safe to assume they are BELOW any models present in the benchmark, because they are unusable without some shenanigans (I assume it is possible to use them eventually, but the effort required to make them work is probably not worth it. Especially comparing to all other 20 models, that didn't have any problems with my environment setup).
 
 ### TOP 10 overall (including API models) by Score and AdamBench
 
 `Scored` is a general quality metrics, while `AdamBench` confronts it with number of iterations and time for performing the whole benchmark.
 
 <p align="center">
-  <img src="./visualisations/top10_heatmap.png" width="900">
+  <img src="./visualisations/top10_heatmap_v11.png" width="900">
 </p>
 
 ### TOP 10 AdamBench
@@ -40,7 +85,8 @@ I tried running all of them, but each of them had issues with tool calling or ch
 
 ### Scored vs AdamBench
 
-`AdamBench` is especially punishing for models, that were not able to complete all 5 banchmark tasks or for those that needed many iterations or a lot of time.
+
+`AdamBench` is especially punishing for models, that were not able to complete all 5 benchmark tasks or for those that needed many iterations or a lot of time.
 
 <p align="center">
   <img src="./visualisations/scored_vs_adambench.png" width="900">
@@ -61,7 +107,8 @@ The benchmark was intended to evaluate how well different models can handle a sh
 - iterative repair of self-introduced bugs,
 - and simplification of overengineered solutions.
 
-The target use case was a small React + TypeScript application developed incrementally across several prompts. The workflow emphasized not only raw code generation quality, but also the model’s ability to recover from mistakes and continue working coherently on its own earlier output. Also it was supposed to measure how well the models work with a minimal input from user. I never directed them to the root cause of the issue (if they intoduced a bug), only describing symptoms to them. The tasks the models had to perform were relatively simple, so this benchmark does not measure the ceiling of a given model's abilities and is not supposed to define "the best model overall", but as mentioned earlier "the best model for local agentic coding with my specific hardware setup".
+
+The target use case was a small React + TypeScript application developed incrementally across several prompts. The workflow emphasized not only raw code generation quality, but also the model’s ability to recover from mistakes and continue working coherently on its own earlier output. Also it was supposed to measure how well the models work with a minimal input from user. I never directed them to the root cause of the issue (if they introduced a bug), only describing symptoms to them. The tasks the models had to perform were relatively simple, so this benchmark does not measure the ceiling of a given model's abilities and is not supposed to define "the best model overall", but as mentioned earlier "the best model for local agentic coding with my specific hardware setup".
 
 ### Prompts
 
@@ -139,7 +186,8 @@ If a project failed after a prompt, the model was given another chance by descri
 - incorrect routing/auth behavior,
 - broken UI functionality.
 
-However, the models were never given a root cause of the bug and were never directed to specific files or parts of code. They were only given the easly observable symptoms. They weren't also given any suggestions about solutions, but I stayed cooperative. If the model included some console.logs and asked me to paste it the output, I did it.
+
+However, the models were never given a root cause of the bug and were never directed to specific files or parts of code. They were only given the easily observable symptoms. They weren't also given any suggestions about solutions, but I stayed cooperative. If the model included some console.logs and asked me to paste it the output, I did it.
 These additional repair attempts were counted as extra iterations and affect `AdamBench` score.
 
 The benchmark therefore rewarded not only raw generation quality, but also:
@@ -282,45 +330,59 @@ The full results table with all collected metrics for local and API models. It d
 
 | Model | AdamBench | Scored | Completed | Iterations | TPS | Input tokens | Output tokens | Time (min) |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| (API) Sonnet4.6 | - | 90.33 | 5 | 5 |  | 6.4m | 71k |  |
-| (API) gpt5.3Codex | - | 89.33 | 5 | 5 |  | 590k | 22k |  |
-| (API) GLM-5 | - | 83.33 | 5 | 5 |  | 1.7m | 35k |  |
-| (API) Qwen3.5 397b | - | 79.67 | 5 | 5 |  | 2.3m | 33k |  |
+| (NEW) (API) Qwen3.6 Plus | 94 | 94 | 5 | 5 |  | 2.4m | 41k |  |
+| (API) Sonnet4.6 | 90.33 | 90.33 | 5 | 5 |  | 6.4m | 71k |  |
+| (API) gpt5.3Codex | 89.33 | 89.33 | 5 | 5 |  | 590k | 22k |  |
+| (NEW) Unsloth/Qwen3.5-27b-Q3_K_M | 84.73 | 86.33 | 5 | 6 | 44 | 2.4m | 41k | 15 |
+| (API) GLM-5 | 83.33 | 83.33 | 5 | 5 |  | 1.7m | 35k |  |
+| (NEW) Unsloth/Qwen3.5-27b-Q4_K_M | 79.53 | 82.67 | 5 | 7 | 13 | 3.8m | 54k | 69 |
+| (NEW) bartowski/agentscope-ai_CoPawe-Flash-9b-q8_0 | 79.04 | 81.67 | 5 | 7 | 83 | 7.3m | 109k | 22 |
+| (API) Qwen3.5 397b | 79.67 | 79.67 | 5 | 5 |  | 2.3m | 33k |  |
+| (NEW) Unsloth/gemma-4-31b-it-Q4_K_S | 75.94 | 79.33 | 5 | 7 | 8 | 770k | 25k | 52 |
+| (API) Mimo v2 Pro | 75.5 | 76.33 | 5 | 7 |  | 860k | 31k |  |
 | Unsloth/Qwen3.5 122b A10b UD-IQ4_XS | 75.02 | 77.33 | 5 | 5 | 24 | 2.7m | 42k | 29 |
-| (API) Mimo v2 Pro | - | 76.33 | 5 | 7 |  | 860k | 31k |  |
-| Unsloth/gpt-oss-120b-f16 | 73.83 | 76 | 5 | 6 | 30 | 855k | 19k | 11 |
-| (API) MiniMaxM2.7 | - | 71.67 | 5 | 5 |  | 1.6m | 35k |  |
+| Unsloth/gpt-oss-120b-f16 | 73.83 | 76.11 | 5 | 6 | 30 | 855k | 19k | 11 |
+| (API) MiniMaxM2.7 | 71.67 | 71.67 | 5 | 5 |  | 1.6m | 35k |  |
 | Unsloth/Qwen3.5 35b A3b Q6_K | 67.12 | 69.33 | 5 | 5 | 68 | 2.2m | 40k | 10 |
+| (NEW) Unsloth/gemma-4-26b-A4b-it-UD-Q6_K_XL (reasoning disabled) | 63.9 | 66.67 | 5 | 6 | 52 | 1.3m | 30k | 10 |
 | Unsloth/Qwen3-Coder-Next UD-IQ4_K_XL | 65.17 | 69.33 | 5 | 8 | 48 | 3.5m | 49k | 17 |
-| Unsloth/gpt-oss-20b F16 | 64.52 | 66 | 5 | 6 | 170 | 800k | 18k | 2 |
+| Unsloth/gpt-oss-20b F16 | 64.52 | 66.2 | 5 | 6 | 170 | 800k | 18k | 2 |
+| (API) DeepSeek v3.2 | 64.33 | 64.33 | 5 | 5 |  | 14.1m | 98k |  |
 | bartowski/Qwen3.5 27b Q4_K_M | 61.27 | 66 | 5 | 5 | 6.5 | 2.8m | 40k | 102 |
-| (API) DeepSeek v3.2 | - | 64.33 | 5 | 5 |  | 14.1m | 98k |  |
 | bartowski/Qwen3.5 9b q8_0 | 58.86 | 63.33 | 5 | 8 | 80 | 2.5m | 68k | 14 |
 | mradermacher/Qwen3.5 27b Claude Opus Reasoning Distilled IQ4_K_M | 55.37 | 64.33 | 5 | 12 | 14 | 2m | 54k | 64 |
 | Unsloth/GLM-4.7-Flash UD-Q6_K_XL | 54.19 | 60.33 | 5 | 10 | 46 | 2.7m | 41k | 15 |
-| AesSedai/Nemotron 3 Super IQ4_XS | 44.24 | 50 | 5 | 6 | 18 | 960k | 38k | 35 |
+| AesSedai/Nemotron 3 Super IQ4_XS | 44.24 | 50.35 | 5 | 6 | 18 | 960k | 38k | 35 |
 | bartowski/OmniCoder 9b q8_0 | 31.8 | 53.67 | 5 | 26 | 85 | 7m | 132k | 26 |
 | Unsloth/GLM-4.5-Air IQ4_XS | 30.3 | 50.33 | 5 | 22 | 16 | 3.3m | 69k | 72 |
 | Unsloth/Qwen3 Coder 30b A3b (no-reasoning) | 22.83 | 54.33 | 3 | 13 | 27 | 2.2m | 66k | 41 |
 | bartowski/Nemotron Cascade 2 30b A3b Q8_0 | 16.66 | 31.67 | 5 | 15 | 50 | 2.3m | 150k | 50 |
+| (NEW) danielcherubini/Qwen3.5-DeltaCoder-9B-q8_0 | 6.12 | 29 | 4 | 19 | 83 | 8.1m | 170k | 34 |
+| (NEW) Unsloth/gemma-4-e4b-it-UD-Q8_K_XL | 5.19 | 38.67 | 2 | 13 | 110 | 1.1m | 45k | 7 |
 | Unsloth/Nemotron 3 Nano 30b UD-Q6_K_XL | 4.77 | 42.33 | 3 | 21 | 51 | 2.9m | 300k | 98 |
 | Unsloth/Qwen3.5 4b BF-16 | 0 | 36.67 | 1 | 5 | 85 | 8m | 154k | 30 |
 | Tesslate/OmniCoder 2 9b q8_0 | 0 | 27 | 2 | 14 | 80 | 2m | 65k | 13 |
 | bartowski/Qwen3.5 2b BF16 | 0 | 11.67 | 0 | 6 |  | 2.2m | 29k |  |
+| (NEW) agentscope-ai/CoPaw-Flash-4b-q8_0 | 0 | 30.33 | 1 | 10 | 140 | 19.5m | 200k | 24 |
+| (NEW) Unsloth/gemma-4-e2b-it-UD-Q8_K_XL | 0 | 28 | 0 | 12 | 180 | 180k | 15k | 1 |
 
 
 ### AdamBench visualisation
 
 <p align="center">
-  <img src="./visualisations/top10_heatmap.png" width="900">
+  <img src="./visualisations/top10_heatmap_v11.png" width="900">
 </p>
 
 <p align="center">
-  <img src="./visualisations/top11-20_heatmap.png" width="900">
+  <img src="./visualisations/top11-20_heatmap_v11.png" width="900">
 </p>
 
 <p align="center">
-  <img src="./visualisations/top21-25_heatmap.png" width="900">
+  <img src="./visualisations/top21-30_heatmap_v11.png" width="900">
+</p>
+
+<p align="center">
+  <img src="./visualisations/top31-35_heatmap_v11.png" width="900">
 </p>
 
 
@@ -337,27 +399,35 @@ So I think this metric is quite interesting and might help to decide what model 
 ## Interpretation and Personal notes
 
 So this one's gonna be less professional :D
-What can easly be seen in the benchmark results:
+
+What can easily be seen in the benchmark results:
 - Qwen3.5 family (and actually Qwen3 too!) is very strong... and I totally expected this.
+
+- (v1.1) Gemma4 is also very good. I would still go for Qwens, but it might be better at some usecases. Definitely worth a try.
 - Nemotron family is very weak and I did not expect that. However, I did a test with Nemotron over API, just to see if it's the issue with my quant or whatever other local reason. It's not. Over API Nemotron wasn't better.
 - GLM family is nice, good medium-level models.
-- Fine-tunes of Qwen... did worse than base models. It was especially surirpsing to me in the case of OmniCoder. I must say, that the general feel of OmniCoder is amazing for it's size and I think it could do much better IF I did a couple runs of the benchmark for every model. This one's worth exploring more.
-- GPT-OSS family was a surprise for me. I didn't expect it to be this good. First of all they waste very little tokens. Their input/output tokens value is way lower than for other models. And on top of that they are very fast (120b wich gave me 30tps in comparison to other similar size models -> 25tps for Qwen3.5 122b and 18tps for Nemotron 3 Super). 
+
+
+
+- Fine-tunes of Qwen... did worse than base models. It was especially surprising to me in the case of OmniCoder. I must say, that the general feel of OmniCoder is amazing for it's size and I think it could do much better IF I did a couple runs of the benchmark for every model. This one's worth exploring more.
+- (v1.1) Above is not really true anymore. The new lightweight king CoPawFlash 9b outperformed many bigger models. While I don't think it's truly better than them and likely has a way lower ceiling, it's super good for its size.
+- GPT-OSS family was a surprise for me. I didn't expect it to be this good. First of all they waste very little tokens. Their input/output tokens value is way lower than for other models. And on top of that they are very fast (120b which gave me 30tps in comparison to other similar size models -> 25tps for Qwen3.5 122b and 18tps for Nemotron 3 Super). 
 - GPT-5.3 Codex and Sonnet4.6 over API obviously make a difference. BUT I didn't expect my local models to come this close to GLM-5 or Qwen3.5 397b and I didn't expect that some of them can even SURPASS MiMo v2 Pro or MiniMax M2.7 (and DeepSeek v3.2, but it didn't do too well, did it? xd)
 - Running models smaller than 9b doesn't make sense for agentic coding. They just... fail.
 
 So, `AdamBench` is one thing, but I wanted to share what I got for myself from this benchmark. Because while `AdamBench` seems like a nice overall metrics, it might not reflect my final personal choices:
 
-TOP 1 daily driver for me: Qwen3.5 35b A3b (nice speed and good quality and leaves more space for longer context if needed due to it's size)
+TOP 1 daily driver for me: ~~Qwen3.5 35b A3b (nice speed and good quality and leaves more space for longer context if needed due to it's size)~~ Not anymore. After v1.1 I'd totally stick with Qwen3.5 27b, it performs very well even at small Quant that actually FIT in my vRAM and gave me good speed thanks to that. 27b it is.
 
-For more complex tasks: Qwen3.5 122b A10b definitely and gpt-oss-120b is something to consider too because it's much faster (due to TPS and better tokens management)
+For more complex tasks: ~~Qwen3.5 122b A10b definitely and gpt-oss-120b is something to consider too because it's much faster (due to TPS and better tokens management)~~ Well, honestly I'd still go with Qwen3.5 27b in this case. However, it's worth testing Qwen3.5 122b A10b and gpt-oss-120b vs Qwen3.5 27b at something more complex than the tasks from this benchmark. (will do it in v2)
 
-For simple tasks/fast iterations: I wanted to put Qwen3.5 9b or OmniCoder 9b, but... after thinking about it I believe that gpt-oss-20b is the best choice for me here. It's incredibly fast (170 tps generation, sic!), has superb tokens managment and just performs well. 
+
+For simple tasks/fast iterations: ~~I wanted to put Qwen3.5 9b or OmniCoder 9b, but... after thinking about it I believe that gpt-oss-20b is the best choice for me here. It's incredibly fast (170 tps generation, sic!), has superb token management and just performs well.~~ gpt-oss-20b is still a nice pick, especially considering it's speed. BUT after v1.1 I would put CoPawFlash 9b higher than gpt-oss-20b in this category, unless I'd really need super fast iterations. Then gpt-oss-20b will still do fine.
 
 So if I had to leave just three models for myself from all the local ones I tested, it would be:
-- Qwen3.5 35b A3b
-- Qwen3.5 122b A10b
-- gpt-oss-20b
+- ~~Qwen3.5 35b A3b~~ Qwen3.5 27b
+- ~~Qwen3.5 122b A10b~~ CoPawFlash 9b
+- ~~gpt-oss-20b~~ I don't need more honestly, but if I had to pick the third one, I'd go for gpt-oss-120b/gpt-oss-20b or Gemma 26b A4b (to get something else than Qwens)
 
 
 And on another note, I never want to touch Nemotron again, it's crazy inefficient (looking at you Nemotron 3 Nano with a holy 300k output tokens, that were mostly reasoning, without being able to fix Snake).
@@ -406,3 +476,13 @@ So obviously the projects were anonymized (at least on the highest level) to avo
 23 - Sonnet4.6 - API
 24 - Mimo v2 Pro - API
 25 - MiniMaxM2.7 - API
+26 - Qwen3.5 2b BF16
+27 - CoPawFlash 9b
+28 - Qwen3.5 27b Q3_K_M
+29 - Qwen3.5 122b A10b UD-IQ4_XS
+30 - Qwen3.5 4b BF-16
+31 - Qwen3.5 27b Q4_K_M
+32 - Gemma4 26b A4b (reasoning disabled)
+33 - DeltaCoder 9b
+34 - Gemma4 e2b
+35 - Qwen3.6 Plus - API

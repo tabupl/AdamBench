@@ -1,0 +1,28 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+button { cursor: pointer; }
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+a { color: #6366f1; text-decoration: none; }
+
+h1, h2, h3 { margin-bottom: 1rem; }
+
+p { line-height: 1.6; margin-bottom: 0.5rem; }
+
+ul { padding-left: 1.5rem; }
+
+li { margin-bottom: 0.5rem; }

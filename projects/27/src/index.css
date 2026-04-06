@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #f0f2f5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: #4299e1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3182ce;
+}
+
+button {
+  font-family: inherit;
+}
+
+input[type='text'],
+input[type='email'] {
+  font-family: inherit;
+}

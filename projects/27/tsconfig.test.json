@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": ["src", "src/**/*.test.tsx", "src/**/*.test.ts"],
+  "compilerOptions": {
+    "isolatedModules": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["vitest/globals", "vite/client"]
+  }
+}
